@@ -70,7 +70,7 @@ CREATE TABLE "student" (
     last_name VARCHAR(50) NOT NULL,
     first_name VARCHAR(50) NOT NULL,
     gender CHAR(1) NOT NULL,
-    matric_no VARCHAR(20) NOT NULL,
+    matric_no VARCHAR(20) NOT NULL UNIQUE,
     email VARCHAR(50) NOT NULL,
     address VARCHAR(100) NOT NULL,
     postal VARCHAR(10) NOT NULL,
