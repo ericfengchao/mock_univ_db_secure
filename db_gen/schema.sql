@@ -12,7 +12,7 @@ DROP TABLE IF EXISTS "school" CASCADE;
 DROP TABLE IF EXISTS "semester" CASCADE;
 
 CREATE TABLE "school" (
-    id INTEGER PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     name VARCHAR(50) NOT NULL UNIQUE,
     email VARCHAR(50) NOT NULL,
     address VARCHAR(100) NOT NULL,
@@ -21,24 +21,24 @@ CREATE TABLE "school" (
 );
 
 CREATE TABLE "academic_year" (
-    id INTEGER PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     start_year INTEGER NOT NULL,
     end_year INTEGER NOT NULL
 );
 
 CREATE TABLE "semester" (
-    id INTEGER PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     semester INTEGER NOT NULL,
     start_date TIMESTAMP WITH TIME ZONE NOT NULL,
     end_date TIMESTAMP WITH TIME ZONE NOT NULL,
-    academic_year_id INTEGER REFERENCES academic_year(id) ON DELETE RESTRICT ON UPDATE CASCADE
+    academic_year_id BIGSERIAL REFERENCES academic_year(id) ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
 CREATE TABLE "specialization" (
-    id INTEGER PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
     index VARCHAR(10) NOT NULL,
-    school_id INTEGER REFERENCES school(id) ON DELETE RESTRICT ON UPDATE CASCADE
+    school_id BIGSERIAL REFERENCES school(id) ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
 CREATE TABLE "admin_officer" (
@@ -50,7 +50,7 @@ CREATE TABLE "admin_officer" (
     office_address VARCHAR(100) NOT NULL,
     office_postal VARCHAR(10) NOT NULL,
     office_tel VARCHAR(20) NOT NULL,
-    school_id INTEGER REFERENCES school(id) ON DELETE RESTRICT ON UPDATE CASCADE
+    school_id BIGSERIAL REFERENCES school(id) ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
 CREATE TABLE "professor" (
@@ -62,7 +62,7 @@ CREATE TABLE "professor" (
     office_address VARCHAR(100) NOT NULL,
     office_postal VARCHAR(10) NOT NULL,
     office_tel VARCHAR(20) NOT NULL,
-    school_id INTEGER REFERENCES school(id) ON DELETE RESTRICT ON UPDATE CASCADE
+    school_id BIGSERIAL REFERENCES school(id) ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
 CREATE TABLE "student" (
@@ -75,11 +75,11 @@ CREATE TABLE "student" (
     address VARCHAR(100) NOT NULL,
     postal VARCHAR(10) NOT NULL,
     tel VARCHAR(20) NOT NULL,
-    specialization_id INTEGER REFERENCES specialization(id) ON DELETE RESTRICT ON UPDATE CASCADE
+    specialization_id BIGSERIAL REFERENCES specialization(id) ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
 CREATE TABLE "loan" (
-    id INTEGER PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     amount FLOAT NOT NULL,
     start_date TIMESTAMP WITH TIME ZONE NOT NULL,
     due_date TIMESTAMP WITH TIME ZONE NOT NULL,
@@ -88,23 +88,23 @@ CREATE TABLE "loan" (
 );
 
 CREATE TABLE "course" (
-    id INTEGER PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
     index INTEGER NOT NULL,
     description TEXT NOT NULL,
-    specialization_id INTEGER REFERENCES specialization(id) ON DELETE RESTRICT ON UPDATE CASCADE
+    specialization_id BIGSERIAL REFERENCES specialization(id) ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
 CREATE TABLE "course_schedule" (
-    id INTEGER PRIMARY KEY,
-    course_id INTEGER REFERENCES course(id) ON DELETE RESTRICT ON UPDATE CASCADE,
-    semester_id INTEGER REFERENCES semester(id) ON DELETE RESTRICT ON UPDATE CASCADE,
+    id BIGSERIAL PRIMARY KEY,
+    course_id BIGSERIAL REFERENCES course(id) ON DELETE RESTRICT ON UPDATE CASCADE,
+    semester_id BIGSERIAL REFERENCES semester(id) ON DELETE RESTRICT ON UPDATE CASCADE,
     professor_id VARCHAR(50) REFERENCES professor(id) ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
 CREATE TABLE "school_fee" (
     student_id VARCHAR(50) REFERENCES student(id) ON DELETE RESTRICT ON UPDATE CASCADE,
-    semester_id INTEGER REFERENCES semester(id) ON DELETE RESTRICT ON UPDATE CASCADE,
+    semester_id BIGSERIAL REFERENCES semester(id) ON DELETE RESTRICT ON UPDATE CASCADE,
     school_fee FLOAT NOT NULL,
     school_fee_paid FLOAT NOT NULL,
     PRIMARY KEY(student_id, semester_id)
@@ -112,7 +112,7 @@ CREATE TABLE "school_fee" (
 
 CREATE TABLE "course_enrollment" (
     student_id VARCHAR(50) REFERENCES student(id) ON DELETE RESTRICT ON UPDATE CASCADE,
-    course_schedule_id INTEGER REFERENCES course_schedule(id) ON DELETE RESTRICT ON UPDATE CASCADE,
+    course_schedule_id BIGSERIAL REFERENCES course_schedule(id) ON DELETE RESTRICT ON UPDATE CASCADE,
     grade FLOAT NOT NULL,
     PRIMARY KEY(student_id, course_schedule_id)
 );
