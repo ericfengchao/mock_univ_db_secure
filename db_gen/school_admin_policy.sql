@@ -3,13 +3,52 @@ CREATE ROLE school_admin WITH LOGIN;
 
 -- Administrative Officer can view Academic Year / Semester / School / Specialization / Course / Course Schedule / Professor / Administrative Officer 
 GRANT SELECT ON academic_year TO school_admin;
+CREATE POLICY school_admin_sel_academic_year ON academic_year
+    FOR SELECT
+    TO school_admin
+    USING (true);
+
 GRANT SELECT ON semester TO school_admin;
+CREATE POLICY school_admin_sel_semester ON semester
+    FOR SELECT
+    TO school_admin
+    USING (true);
+
 GRANT SELECT ON school TO school_admin;
+CREATE POLICY school_admin_sel_school ON school
+    FOR SELECT
+    TO school_admin
+    USING (true);
+
 GRANT SELECT ON specialization TO school_admin;
+CREATE POLICY school_admin_sel_specialization ON specialization
+    FOR SELECT
+    TO school_admin
+    USING (true);
+
 GRANT SELECT ON course TO school_admin;
+CREATE POLICY school_admin_sel_course ON course
+    FOR SELECT
+    TO school_admin
+    USING (true);
+
 GRANT SELECT ON course_schedule TO school_admin;
+CREATE POLICY school_admin_sel_course_schedule ON course_schedule
+    FOR SELECT
+    TO school_admin
+    USING (true);
+
 GRANT SELECT ON professor TO school_admin;
+CREATE POLICY school_admin_sel_professor ON professor
+    FOR SELECT
+    TO school_admin
+    USING (true);
+
 GRANT SELECT ON admin_officer TO school_admin;
+CREATE POLICY school_admin_sel_admin_officer ON admin_officer
+    FOR SELECT
+    TO school_admin
+    USING (true);
 
 -- Administrative Officer can update own Administrative Officer;
 GRANT UPDATE ON admin_officer TO school_admin;

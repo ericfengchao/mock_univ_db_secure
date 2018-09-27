@@ -3,13 +3,52 @@ CREATE ROLE professor WITH LOGIN;
 
 -- Professor can view Academic Year / Semester / School / Specialization / Course / Course Schedule / Professor / Administrative Officer
 GRANT SELECT ON academic_year TO professor;
+CREATE POLICY prof_sel_academic_year ON academic_year
+    FOR SELECT
+    TO professor
+    USING (true);
+
 GRANT SELECT ON semester TO professor;
+CREATE POLICY prof_sel_semester ON semester
+    FOR SELECT
+    TO professor
+    USING (true);
+
 GRANT SELECT ON school TO professor;
+CREATE POLICY prof_sel_school ON school
+    FOR SELECT
+    TO professor
+    USING (true);
+
 GRANT SELECT ON specialization TO professor;
+CREATE POLICY prof_sel_specialization ON specialization
+    FOR SELECT
+    TO professor
+    USING (true);
+
 GRANT SELECT ON course TO professor;
+CREATE POLICY prof_sel_course ON course
+    FOR SELECT
+    TO professor
+    USING (true);
+
 GRANT SELECT ON course_schedule TO professor;
+CREATE POLICY prof_sel_course_schedule ON course_schedule
+    FOR SELECT
+    TO professor
+    USING (true);
+
 GRANT SELECT ON professor TO professor;
+CREATE POLICY prof_sel_professor ON professor
+    FOR SELECT
+    TO professor
+    USING (true);
+
 GRANT SELECT ON admin_officer TO professor;
+CREATE POLICY prof_sel_admin_officer ON admin_officer
+    FOR SELECT
+    TO professor
+    USING (true);
 
 -- Professor can view and update grade own Course Enrollment
 GRANT SELECT ON course_enrollment TO professor;
