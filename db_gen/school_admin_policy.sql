@@ -378,9 +378,29 @@ CREATE POLICY school_admin_delete_own_school_course_enrollment ON course_enrollm
     );    
 
 -- Administrative Officer can view average grade of each Student in Course Enrollment of own School;  
-CREATE VIEW student_avg_grade AS 
-	SELECT ce.student_id, to_char(AVG (ce.grade), '99999999999999999D99') AS avg_grade
-	FROM course_enrollment ce
-    GROUP bY ce.student_id;
+CREATE VIEW all_student_avg_grade AS 
+SELECT ce.student_id, to_char(AVG (ce.grade), '99999999999999999D99') AS avg_grade
+FROM course_enrollment ce
+GROUP BY ce.student_id;   
+
+CREATE TABLE "student_avg_grade" (
+    student_id VARCHAR(50),
+    avg_grade TEXT NOT NULL
+);
 GRANT SELECT ON student_avg_grade TO school_admin;
+
+CREATE RULE "_RETURN" AS
+    ON SELECT TO student_avg_grade 
+    DO INSTEAD
+        SELECT *
+        FROM all_student_avg_grade
+        WHERE student_id IN (
+            SELECT stu.id 
+            FROM admin_officer ao 
+            INNER JOIN specialization sp 
+            ON (ao.school_id=sp.school_id) 
+            INNER JOIN student stu 
+            ON (sp.id = stu.specialization_id)
+            WHERE ao.id=current_user
+        );
 
