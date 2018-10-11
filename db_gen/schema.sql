@@ -99,7 +99,7 @@ CREATE TABLE "course_schedule" (
     id SERIAL PRIMARY KEY,
     course_id INTEGER REFERENCES course(id) ON DELETE RESTRICT ON UPDATE CASCADE,
     semester_id INTEGER REFERENCES semester(id) ON DELETE RESTRICT ON UPDATE CASCADE,
-    professor_id VARCHAR(50) REFERENCES professor(id) ON DELETE RESTRICT ON UPDATE CASCADE
+    professor_id VARCHAR(50) REFERENCES professor(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE "school_fee" (
@@ -111,8 +111,8 @@ CREATE TABLE "school_fee" (
 );
 
 CREATE TABLE "course_enrollment" (
-    student_id VARCHAR(50) REFERENCES student(id) ON DELETE RESTRICT ON UPDATE CASCADE,
-    course_schedule_id INTEGER REFERENCES course_schedule(id) ON DELETE RESTRICT ON UPDATE CASCADE,
+    student_id VARCHAR(50) REFERENCES student(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    course_schedule_id INTEGER REFERENCES course_schedule(id) ON DELETE CASCADE ON UPDATE CASCADE,
     grade FLOAT NOT NULL,
     PRIMARY KEY(student_id, course_schedule_id)
 );
