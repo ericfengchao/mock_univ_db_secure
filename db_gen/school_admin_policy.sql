@@ -225,6 +225,13 @@ CREATE POLICY school_admin_update_own_school_student ON student
             FROM admin_officer ao INNER JOIN specialization sp ON (ao.school_id=sp.school_id)
             WHERE ao.id=current_user
         )
+    )
+    WITH CHECK (
+        specialization_id IN (
+            SELECT sp.id 
+            FROM admin_officer ao INNER JOIN specialization sp ON (ao.school_id=sp.school_id)
+            WHERE ao.id=current_user
+        )
     );
 CREATE POLICY school_admin_insert_own_school_student ON student
     FOR INSERT
