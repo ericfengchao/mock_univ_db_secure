@@ -164,7 +164,6 @@ CREATE TABLE course_enrollment (
 );
 
 CREATE TABLE grade (
-    id INTEGER PRIMARY KEY,
     course_enrollment_id INTEGER,
     grade FLOAT NOT NULL,
 
