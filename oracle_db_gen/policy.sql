@@ -210,9 +210,6 @@ END;
 SELECT * FROM ALL_SA_LABELS;
 
 
-
-)'S:AD:BT4211'))'S:AD:BT4211'))
-
 -- set user level, compartment, group
 BEGIN
  SA_USER_ADMIN.SET_LEVELS (
