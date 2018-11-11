@@ -30,6 +30,7 @@ GRANT SELECT, UPDATE, INSERT, DELETE ON professor TO op_staff;
 GRANT SELECT, UPDATE, INSERT, DELETE ON admin_officer TO op_staff;
 GRANT SELECT, UPDATE, INSERT, DELETE ON student TO op_staff;
 GRANT SELECT, UPDATE, INSERT, DELETE ON course_enrollment TO op_staff;
+GRANT SELECT ON staff_salary TO op_staff;
 
 GRANT SELECT, UPDATE, INSERT, DELETE ON academic_year TO op_director;
 GRANT SELECT, UPDATE, INSERT, DELETE ON semester TO op_director;
@@ -53,6 +54,7 @@ GRANT SELECT ON admin_officer TO fn_staff;
 GRANT SELECT ON student TO fn_staff;
 GRANT SELECT, UPDATE, INSERT, DELETE ON school_fee TO fn_staff;
 GRANT SELECT, UPDATE, INSERT, DELETE ON loan TO fn_staff;
+GRANT SELECT ON staff_salary TO fn_staff;
 
 GRANT SELECT ON academic_year TO fn_director;
 GRANT SELECT ON semester TO fn_director;
