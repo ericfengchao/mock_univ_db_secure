@@ -53,7 +53,6 @@ GRANT SELECT ON admin_officer TO fn_staff;
 GRANT SELECT ON student TO fn_staff;
 GRANT SELECT, UPDATE, INSERT, DELETE ON school_fee TO fn_staff;
 GRANT SELECT, UPDATE, INSERT, DELETE ON loan TO fn_staff;
-GRANT INSERT ON staff_salary TO fn_staff;
 
 GRANT SELECT ON academic_year TO fn_director;
 GRANT SELECT ON semester TO fn_director;

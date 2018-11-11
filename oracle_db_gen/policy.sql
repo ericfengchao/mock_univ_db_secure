@@ -103,13 +103,8 @@ BEGIN
   data_label      => TRUE);
  SA_LABEL_ADMIN.CREATE_LABEL  (
   policy_name     => 'ols_pol',
-  label_tag       => '2100',
-  label_value     => 'C:AD:',
-  data_label      => TRUE);
- SA_LABEL_ADMIN.CREATE_LABEL  (
-  policy_name     => 'ols_pol',
   label_tag       => '2200',
-  label_value     => 'C:FN:',
+  label_value     => 'C::CS5322,CS5228',
   data_label      => TRUE);
  SA_LABEL_ADMIN.CREATE_LABEL  (
   policy_name     => 'ols_pol',
@@ -133,43 +128,28 @@ BEGIN
   data_label      => TRUE);
  SA_LABEL_ADMIN.CREATE_LABEL  (
   policy_name     => 'ols_pol',
+  label_tag       => '2800',
+  label_value     => 'C:OP:CS5228',
+  data_label      => TRUE);
+ SA_LABEL_ADMIN.CREATE_LABEL  (
+  policy_name     => 'ols_pol',
+  label_tag       => '2900',
+  label_value     => 'C:OP:BT4211',
+  data_label      => TRUE);
+ SA_LABEL_ADMIN.CREATE_LABEL  (
+  policy_name     => 'ols_pol',
   label_tag       => '2700',
   label_value     => 'C:AD:CS5322',
   data_label      => TRUE);
  SA_LABEL_ADMIN.CREATE_LABEL  (
   policy_name     => 'ols_pol',
-  label_tag       => '3100',
-  label_value     => 'S:FN:',
+  label_tag       => '2910',
+  label_value     => 'C:AD:CS5228',
   data_label      => TRUE);
  SA_LABEL_ADMIN.CREATE_LABEL  (
   policy_name     => 'ols_pol',
-  label_tag       => '3200',
-  label_value     => 'S::CS5228',
-  data_label      => TRUE);
- SA_LABEL_ADMIN.CREATE_LABEL  (
-  policy_name     => 'ols_pol',
-  label_tag       => '3300',
-  label_value     => 'S::BT4211',
-  data_label      => TRUE);
- SA_LABEL_ADMIN.CREATE_LABEL  (
-  policy_name     => 'ols_pol',
-  label_tag       => '3400',
-  label_value     => 'S:OP:CS5228',
-  data_label      => TRUE);
- SA_LABEL_ADMIN.CREATE_LABEL  (
-  policy_name     => 'ols_pol',
-  label_tag       => '3500',
-  label_value     => 'S:OP:BT4211',
-  data_label      => TRUE);
- SA_LABEL_ADMIN.CREATE_LABEL  (
-  policy_name     => 'ols_pol',
-  label_tag       => '3600',
-  label_value     => 'S:AD:CS5228',
-  data_label      => TRUE);
- SA_LABEL_ADMIN.CREATE_LABEL  (
-  policy_name     => 'ols_pol',
-  label_tag       => '3700',
-  label_value     => 'S:AD:BT4211',
+  label_tag       => '2920',
+  label_value     => 'C:AD:BT4211',
   data_label      => TRUE);
  SA_LABEL_ADMIN.CREATE_LABEL  (
   policy_name     => 'ols_pol',
@@ -178,33 +158,13 @@ BEGIN
   data_label      => TRUE);
  SA_LABEL_ADMIN.CREATE_LABEL  (
   policy_name     => 'ols_pol',
-  label_tag       => '3900',
-  label_value     => 'S:OP:SOC',
-  data_label      => TRUE);
- SA_LABEL_ADMIN.CREATE_LABEL  (
-  policy_name     => 'ols_pol',
   label_tag       => '3910',
   label_value     => 'S:FN:BIZ',
   data_label      => TRUE);
  SA_LABEL_ADMIN.CREATE_LABEL  (
   policy_name     => 'ols_pol',
-  label_tag       => '3920',
-  label_value     => 'S:OP:UN',
-  data_label      => TRUE);
- SA_LABEL_ADMIN.CREATE_LABEL  (
-  policy_name     => 'ols_pol',
   label_tag       => '4100',
   label_value     => 'HS::',
-  data_label      => TRUE);
- SA_LABEL_ADMIN.CREATE_LABEL  (
-  policy_name     => 'ols_pol',
-  label_tag       => '4200',
-  label_value     => 'HS:FN:',
-  data_label      => TRUE);
- SA_LABEL_ADMIN.CREATE_LABEL  (
-  policy_name     => 'ols_pol',
-  label_tag       => '4300',
-  label_value     => 'HS:OP:SOC',
   data_label      => TRUE);
 END;
 SELECT * FROM ALL_SA_LABELS;
@@ -226,23 +186,23 @@ BEGIN
   policy_name   => 'ols_pol',
   user_name     => 'professor', 
   max_level     => 'C',
-  min_level     => 'C',
+  min_level     => 'P',
   def_level     => 'C',
   row_level     => 'C');
  SA_USER_ADMIN.SET_COMPARTMENTS (
   policy_name   => 'ols_pol',
   user_name     => 'professor', 
   read_comps    => 'AD,OP',
-  write_comps   => 'AD,OP',
+  write_comps   => 'AD',
   def_comps     => 'AD,OP',
-  row_comps     => 'AD,OP');
+  row_comps     => 'AD');
  SA_USER_ADMIN.SET_GROUPS (
   policy_name   => 'ols_pol',
   user_name     => 'professor', 
-  read_groups   => 'CS5322',
-  write_groups  => 'CS5322',
-  def_groups    => 'CS5322',
-  row_groups    => 'CS5322');
+  read_groups   => 'CS5228',
+  write_groups  => 'CS5228',
+  def_groups    => 'CS5228',
+  row_groups    => 'CS5228');
 END;
 
 BEGIN
@@ -250,7 +210,7 @@ BEGIN
   policy_name   => 'ols_pol',
   user_name     => 'op_staff', 
   max_level     => 'S',
-  min_level     => 'S',
+  min_level     => 'P',
   def_level     => 'S',
   row_level     => 'S');
  SA_USER_ADMIN.SET_COMPARTMENTS (
@@ -274,7 +234,7 @@ BEGIN
   policy_name   => 'ols_pol',
   user_name     => 'op_director', 
   max_level     => 'HS',
-  min_level     => 'HS',
+  min_level     => 'P',
   def_level     => 'HS',
   row_level     => 'HS');
  SA_USER_ADMIN.SET_COMPARTMENTS (
@@ -298,7 +258,7 @@ BEGIN
   policy_name   => 'ols_pol',
   user_name     => 'fn_staff', 
   max_level     => 'S',
-  min_level     => 'S',
+  min_level     => 'P',
   def_level     => 'S',
   row_level     => 'S');
  SA_USER_ADMIN.SET_COMPARTMENTS (
@@ -322,7 +282,7 @@ BEGIN
   policy_name   => 'ols_pol',
   user_name     => 'fn_director', 
   max_level     => 'HS',
-  min_level     => 'HS',
+  min_level     => 'P',
   def_level     => 'HS',
   row_level     => 'HS');
  SA_USER_ADMIN.SET_COMPARTMENTS (
