@@ -6,10 +6,12 @@ DROP TABLE loan;
 DROP TABLE student;
 DROP TABLE professor;
 DROP TABLE admin_officer;
-DROP TABLE specialization;
 DROP TABLE semester;
 DROP TABLE academic_year;
 DROP TABLE school;
+DROP TABLE grade;
+DROP TABLE staff_salary;
+
 
 CREATE TABLE school (
     id INTEGER PRIMARY KEY,
@@ -32,21 +34,10 @@ CREATE TABLE semester (
     start_date TIMESTAMP WITH TIME ZONE NOT NULL,
     end_date TIMESTAMP WITH TIME ZONE NOT NULL,
     academic_year_id INTEGER,
-    
-    CONSTRAINT fk_sem_academic_year 
+
+    CONSTRAINT fk_sem_academic_year
     FOREIGN KEY (academic_year_id)
     REFERENCES academic_year(id)
-);
-
-CREATE TABLE specialization (
-    id INTEGER PRIMARY KEY,
-    name VARCHAR(50) NOT NULL,
-    idx VARCHAR(10) NOT NULL,
-    school_id INTEGER,
-
-    CONSTRAINT fk_spec_school
-    FOREIGN KEY (school_id)
-    REFERENCES school(id)
 );
 
 CREATE TABLE admin_officer (
@@ -91,11 +82,11 @@ CREATE TABLE student (
     address VARCHAR(100) NOT NULL,
     postal VARCHAR(10) NOT NULL,
     tel VARCHAR(20) NOT NULL,
-    specialization_id INTEGER,
+    school_id INTEGER,
 
-    CONSTRAINT fk_stu_spec
-    FOREIGN KEY(specialization_id)
-    REFERENCES specialization(id)
+    CONSTRAINT fk_stu_sch
+    FOREIGN KEY(school_id)
+    REFERENCES school(id)
 );
 
 CREATE TABLE loan (
@@ -116,11 +107,11 @@ CREATE TABLE course (
     name VARCHAR(50) NOT NULL,
     idx INTEGER NOT NULL,
     description CLOB NOT NULL,
-    specialization_id INTEGER,
+    school_id INTEGER,
 
-    CONSTRAINT fk_course_spec 
-    FOREIGN KEY (specialization_id) 
-    REFERENCES specialization(id)
+    CONSTRAINT fk_course_sch
+    FOREIGN KEY (school_id)
+    REFERENCES school(id)
 );
 
 CREATE TABLE course_schedule (
@@ -160,11 +151,9 @@ CREATE TABLE school_fee (
 );
 
 CREATE TABLE course_enrollment (
+    id INTEGER PRIMARY KEY,
     student_id VARCHAR(50),
     course_schedule_id INTEGER,
-    grade FLOAT NOT NULL,
-
-    PRIMARY KEY(student_id, course_schedule_id),
 
     CONSTRAINT fk_ce_stu
     FOREIGN KEY (student_id)
@@ -174,4 +163,31 @@ CREATE TABLE course_enrollment (
     FOREIGN KEY (course_schedule_id)
     REFERENCES course_schedule(id)
 );
+
+CREATE TABLE grade (
+    id INTEGER PRIMARY KEY,
+    course_enrollment_id INTEGER,
+    grade FLOAT NOT NULL,
+
+    CONSTRAINT fk_gr_ce
+    FOREIGN KEY (course_enrollment_id)
+    REFERENCES course_enrollment(id)
+);
+
+CREATE TABLE staff_salary (
+    id VARCHAR(50) PRIMARY KEY,
+    admin_officer_id VARCHAR(50),
+    professor_id VARCHAR(50),
+    salary FLOAT NOT NULL,
+
+    CONSTRAINT fk_ss_ao
+    FOREIGN KEY (admin_officer_id)
+    REFERENCES admin_officer(id),
+
+    CONSTRAINT fk_ss_pr
+    FOREIGN KEY (professor_id)
+    REFERENCES professor(id)
+);
+
+
 
