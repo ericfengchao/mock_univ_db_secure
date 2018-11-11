@@ -1,5 +1,4 @@
 -- cs5322
--- schema.sql
 
 GRANT ALL PRIVILEGES TO LBACSYS;
 

@@ -1,4 +1,5 @@
 -- LBACSYS
+
 -- create policy
 BEGIN
  SA_SYSDBA.CREATE_POLICY (
@@ -118,11 +119,21 @@ BEGIN
  SA_LABEL_ADMIN.CREATE_LABEL  (
   policy_name     => 'ols_pol',
   label_tag       => '2400',
+  label_value     => 'C::CS5228',
+  data_label      => TRUE); 
+ SA_LABEL_ADMIN.CREATE_LABEL  (
+  policy_name     => 'ols_pol',
+  label_tag       => '2500',
+  label_value     => 'C::BT4211',
+  data_label      => TRUE);
+ SA_LABEL_ADMIN.CREATE_LABEL  (
+  policy_name     => 'ols_pol',
+  label_tag       => '2600',
   label_value     => 'C:OP:CS5322',
   data_label      => TRUE);
  SA_LABEL_ADMIN.CREATE_LABEL  (
   policy_name     => 'ols_pol',
-  label_tag       => '2500',
+  label_tag       => '2700',
   label_value     => 'C:AD:CS5322',
   data_label      => TRUE);
  SA_LABEL_ADMIN.CREATE_LABEL  (
@@ -133,16 +144,51 @@ BEGIN
  SA_LABEL_ADMIN.CREATE_LABEL  (
   policy_name     => 'ols_pol',
   label_tag       => '3200',
-  label_value     => 'S:FN:SOC',
+  label_value     => 'S::CS5228',
   data_label      => TRUE);
  SA_LABEL_ADMIN.CREATE_LABEL  (
   policy_name     => 'ols_pol',
   label_tag       => '3300',
-  label_value     => 'S:OP:SOC',
+  label_value     => 'S::BT4211',
   data_label      => TRUE);
  SA_LABEL_ADMIN.CREATE_LABEL  (
   policy_name     => 'ols_pol',
   label_tag       => '3400',
+  label_value     => 'S:OP:CS5228',
+  data_label      => TRUE);
+ SA_LABEL_ADMIN.CREATE_LABEL  (
+  policy_name     => 'ols_pol',
+  label_tag       => '3500',
+  label_value     => 'S:OP:BT4211',
+  data_label      => TRUE);
+ SA_LABEL_ADMIN.CREATE_LABEL  (
+  policy_name     => 'ols_pol',
+  label_tag       => '3600',
+  label_value     => 'S:AD:CS5228',
+  data_label      => TRUE);
+ SA_LABEL_ADMIN.CREATE_LABEL  (
+  policy_name     => 'ols_pol',
+  label_tag       => '3700',
+  label_value     => 'S:AD:BT4211',
+  data_label      => TRUE);
+ SA_LABEL_ADMIN.CREATE_LABEL  (
+  policy_name     => 'ols_pol',
+  label_tag       => '3800',
+  label_value     => 'S:FN:SOC',
+  data_label      => TRUE);
+ SA_LABEL_ADMIN.CREATE_LABEL  (
+  policy_name     => 'ols_pol',
+  label_tag       => '3900',
+  label_value     => 'S:OP:SOC',
+  data_label      => TRUE);
+ SA_LABEL_ADMIN.CREATE_LABEL  (
+  policy_name     => 'ols_pol',
+  label_tag       => '3910',
+  label_value     => 'S:FN:BIZ',
+  data_label      => TRUE);
+ SA_LABEL_ADMIN.CREATE_LABEL  (
+  policy_name     => 'ols_pol',
+  label_tag       => '3920',
   label_value     => 'S:OP:UN',
   data_label      => TRUE);
  SA_LABEL_ADMIN.CREATE_LABEL  (
@@ -153,10 +199,19 @@ BEGIN
  SA_LABEL_ADMIN.CREATE_LABEL  (
   policy_name     => 'ols_pol',
   label_tag       => '4200',
+  label_value     => 'HS:FN:',
+  data_label      => TRUE);
+ SA_LABEL_ADMIN.CREATE_LABEL  (
+  policy_name     => 'ols_pol',
+  label_tag       => '4300',
   label_value     => 'HS:OP:SOC',
   data_label      => TRUE);
 END;
 SELECT * FROM ALL_SA_LABELS;
+
+
+
+)'S:AD:BT4211'))'S:AD:BT4211'))
 
 -- set user level, compartment, group
 BEGIN
@@ -304,9 +359,6 @@ END;
 SELECT * FROM DBA_SA_USER_PRIVS;
 
 
-
-
-
 BEGIN
  SA_POLICY_ADMIN.APPLY_TABLE_POLICY (
   policy_name    => 'ols_pol',
@@ -315,9 +367,6 @@ BEGIN
   table_options  => 'WRITE_CONTROL,CHECK_CONTROL',
   label_function => NULL,
   predicate      => NULL);
-END;
-
-BEGIN
  SA_POLICY_ADMIN.APPLY_TABLE_POLICY (
   policy_name    => 'ols_pol',
   schema_name    => 'cs5322', 
@@ -325,9 +374,6 @@ BEGIN
   table_options  => 'WRITE_CONTROL,CHECK_CONTROL',
   label_function => NULL,
   predicate      => NULL);
-END;
-
-BEGIN
  SA_POLICY_ADMIN.APPLY_TABLE_POLICY (
   policy_name    => 'ols_pol',
   schema_name    => 'cs5322', 
@@ -335,9 +381,6 @@ BEGIN
   table_options  => 'WRITE_CONTROL,CHECK_CONTROL',
   label_function => NULL,
   predicate      => NULL);
-END;
-
-BEGIN
  SA_POLICY_ADMIN.APPLY_TABLE_POLICY (
   policy_name    => 'ols_pol',
   schema_name    => 'cs5322', 
@@ -345,9 +388,6 @@ BEGIN
   table_options  => 'WRITE_CONTROL,CHECK_CONTROL',
   label_function => NULL,
   predicate      => NULL);
-END;
-
-BEGIN
  SA_POLICY_ADMIN.APPLY_TABLE_POLICY (
   policy_name    => 'ols_pol',
   schema_name    => 'cs5322', 
@@ -355,9 +395,6 @@ BEGIN
   table_options  => 'WRITE_CONTROL,CHECK_CONTROL',
   label_function => NULL,
   predicate      => NULL);
-END;
-
-BEGIN
  SA_POLICY_ADMIN.APPLY_TABLE_POLICY (
   policy_name    => 'ols_pol',
   schema_name    => 'cs5322', 
@@ -365,9 +402,6 @@ BEGIN
   table_options  => 'WRITE_CONTROL,CHECK_CONTROL',
   label_function => NULL,
   predicate      => NULL);
-END;
-
-BEGIN
  SA_POLICY_ADMIN.APPLY_TABLE_POLICY (
   policy_name    => 'ols_pol',
   schema_name    => 'cs5322', 
@@ -375,9 +409,6 @@ BEGIN
   table_options  => 'WRITE_CONTROL,CHECK_CONTROL',
   label_function => NULL,
   predicate      => NULL);
-END;
-
-BEGIN
  SA_POLICY_ADMIN.APPLY_TABLE_POLICY (
   policy_name    => 'ols_pol',
   schema_name    => 'cs5322', 
@@ -385,9 +416,6 @@ BEGIN
   table_options  => 'READ_CONTROL,WRITE_CONTROL,CHECK_CONTROL',
   label_function => NULL,
   predicate      => NULL);
-END;
-
-BEGIN
  SA_POLICY_ADMIN.APPLY_TABLE_POLICY (
   policy_name    => 'ols_pol',
   schema_name    => 'cs5322', 
@@ -395,9 +423,6 @@ BEGIN
   table_options  => 'READ_CONTROL,WRITE_CONTROL,CHECK_CONTROL',
   label_function => NULL,
   predicate      => NULL);
-END;
-
-BEGIN
  SA_POLICY_ADMIN.APPLY_TABLE_POLICY (
   policy_name    => 'ols_pol',
   schema_name    => 'cs5322', 
@@ -405,9 +430,6 @@ BEGIN
   table_options  => 'READ_CONTROL,WRITE_CONTROL,CHECK_CONTROL',
   label_function => NULL,
   predicate      => NULL);
-END;
-
-BEGIN
  SA_POLICY_ADMIN.APPLY_TABLE_POLICY (
   policy_name    => 'ols_pol',
   schema_name    => 'cs5322', 
@@ -415,9 +437,6 @@ BEGIN
   table_options  => 'READ_CONTROL,WRITE_CONTROL,CHECK_CONTROL',
   label_function => NULL,
   predicate      => NULL);
-END;
-
-BEGIN
  SA_POLICY_ADMIN.APPLY_TABLE_POLICY (
   policy_name    => 'ols_pol',
   schema_name    => 'cs5322', 
@@ -425,9 +444,6 @@ BEGIN
   table_options  => 'READ_CONTROL,WRITE_CONTROL,CHECK_CONTROL',
   label_function => NULL,
   predicate      => NULL);
-END;
-
-BEGIN
  SA_POLICY_ADMIN.APPLY_TABLE_POLICY (
   policy_name    => 'ols_pol',
   schema_name    => 'cs5322', 

@@ -1,3 +1,5 @@
+-- cs5322
+
 DROP TABLE loan;
 DROP TABLE grade;
 DROP TABLE staff_salary;
@@ -176,6 +178,3 @@ CREATE TABLE staff_salary (
     staff_id VARCHAR(50) PRIMARY KEY,
     salary FLOAT NOT NULL
 );
-
-
-
