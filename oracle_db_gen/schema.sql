@@ -1,17 +1,16 @@
+DROP TABLE loan;
+DROP TABLE grade;
+DROP TABLE staff_salary;
 DROP TABLE course_enrollment;
 DROP TABLE school_fee;
 DROP TABLE course_schedule;
 DROP TABLE course;
-DROP TABLE loan;
 DROP TABLE student;
 DROP TABLE professor;
 DROP TABLE admin_officer;
 DROP TABLE semester;
 DROP TABLE academic_year;
 DROP TABLE school;
-DROP TABLE grade;
-DROP TABLE staff_salary;
-
 
 CREATE TABLE school (
     id INTEGER PRIMARY KEY,
@@ -175,18 +174,8 @@ CREATE TABLE grade (
 );
 
 CREATE TABLE staff_salary (
-    id VARCHAR(50) PRIMARY KEY,
-    admin_officer_id VARCHAR(50),
-    professor_id VARCHAR(50),
-    salary FLOAT NOT NULL,
-
-    CONSTRAINT fk_ss_ao
-    FOREIGN KEY (admin_officer_id)
-    REFERENCES admin_officer(id),
-
-    CONSTRAINT fk_ss_pr
-    FOREIGN KEY (professor_id)
-    REFERENCES professor(id)
+    staff_id VARCHAR(50) PRIMARY KEY,
+    salary FLOAT NOT NULL
 );
 
 
